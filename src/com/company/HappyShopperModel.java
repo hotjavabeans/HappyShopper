@@ -12,7 +12,7 @@ public class HappyShopperModel implements ModelInterface {
     }
 
     @Override
-    public int getNumOfPickLists() {
+    public int getNumOfPickLists(String pickListType) {
         return 0;
         //return pickListArrayList.size??
     }

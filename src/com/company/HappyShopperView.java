@@ -38,22 +38,19 @@ public class HappyShopperView implements ActionListener, PickListObserver {
         mainMenuMenu = new JMenu("App Control");
 
         exitMenuItem = new JMenuItem("Quit");
-        exitMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        exitMenuItem.addActionListener(e -> System.exit(0));
         mainMenuBar.add(mainMenuMenu);
         mainMenuMenu.add(exitMenuItem);
         mainMenuFrame.setJMenuBar(mainMenuBar);
 
-        getAmbientButton = new JButton("AMBIENT PICKLIST: " + model.getNumOfPickLists());
+        getAmbientButton = new JButton("AMBIENT PICKLIST: " + model.getNumOfPickLists("ambient"));
         getAmbientButton.addActionListener(this);
-        getChilledButton = new JButton("CHILLED PICKLIST");
-        getFrozenButton = new JButton("FROZEN PICKLIST");
-        getProduceButton = new JButton("PRODUCE PICKLIST");
-
+        getChilledButton = new JButton("CHILLED PICKLIST: " + model.getNumOfPickLists("chilled"));
+        getChilledButton.addActionListener(this);
+        getFrozenButton = new JButton("FROZEN PICKLIST: " + model.getNumOfPickLists("frozen"));
+        getFrozenButton.addActionListener(this);
+        getProduceButton = new JButton("PRODUCE PICKLIST: " + model.getNumOfPickLists("produce"));
+        getProduceButton.addActionListener(this);
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(getAmbientButton);
         buttonPanel.add(getChilledButton);
