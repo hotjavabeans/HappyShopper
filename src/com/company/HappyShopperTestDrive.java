@@ -20,12 +20,13 @@ public class HappyShopperTestDrive {
         ModelInterface model = new HappyShopperModel();
         ControllerInterface controller = new HappyShopperController(model);
 
+        String pickListType = "ambient";
         PickListFactory factory = new PickListFactory();
         try {
-            PickList pickList = factory.getPickList("ambient");
+            PickList pickList = factory.getPickList(pickListType);
             pickList.createPickList();
         } catch (PickListTypeNotFoundException e) {
-            System.err.print(e); //How to resolve 'Throwable Argument'?
+            System.err.print(e);
         }
     }
 }

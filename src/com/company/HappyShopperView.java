@@ -38,36 +38,36 @@ public class HappyShopperView implements ActionListener, PickListObserver {
         mainMenuMenu = new JMenu("App Control");
 
         exitMenuItem = new JMenuItem("Quit");
-        exitMenuItem.addActionListener(e -> System.exit(0));
+        exitMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
         mainMenuBar.add(mainMenuMenu);
         mainMenuMenu.add(exitMenuItem);
         mainMenuFrame.setJMenuBar(mainMenuBar);
 
-
-        //use iteration to addActionListeners??
-        getAmbientButton = new JButton("AMBIENT : " + model.getNumOfPickLists("ambient"));
+        getAmbientButton = new JButton("AMBIENT PICKLIST: " + model.getNumOfPickLists());
         getAmbientButton.addActionListener(this);
-        getChilledButton = new JButton("CHILLED : " + model.getNumOfPickLists("chilled"));
-        getChilledButton.addActionListener(this);
-        getFrozenButton = new JButton("FROZEN : " + model.getNumOfPickLists("frozen"));
-        getFrozenButton.addActionListener(this);
-        getProduceButton = new JButton("PRODUCE : " + model.getNumOfPickLists("produce"));
-        getProduceButton.addActionListener(this);
+        getChilledButton = new JButton("CHILLED PICKLIST");
+        getFrozenButton = new JButton("FROZEN PICKLIST");
+        getProduceButton = new JButton("PRODUCE PICKLIST");
 
-        //use iteration to add buttons to panel?
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(getAmbientButton);
         buttonPanel.add(getChilledButton);
         buttonPanel.add(getFrozenButton);
         buttonPanel.add(getProduceButton);
         mainMenuPanel.add(buttonPanel);
-
+//        mainMenuHeader.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 //        ArrayList<JButton> buttons = new ArrayList<>();
 //        for (int i = 0; i < buttons.size(); i++) {
 //            buttons.get(i).setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 //        }
         mainMenuFrame.getRootPane().setDefaultButton(getAmbientButton);
         mainMenuFrame.getContentPane().add(mainMenuPanel);
+//        , BorderLayout.CENTER ^^
         mainMenuFrame.pack();
         mainMenuFrame.setLocationRelativeTo(null);
         mainMenuFrame.setVisible(true);
@@ -88,6 +88,6 @@ public class HappyShopperView implements ActionListener, PickListObserver {
 
     @Override
     public void updatePickLists() {
-        model.getNumOfPickLists("ambient");
+
     }
 }

@@ -1,10 +1,13 @@
 package com.company;
 
 public class PickListFactory {
-    //use CONSTANTS instead??
+    final String AMBIENT = "ambient";
+
 
     public PickList getPickList(String pickListType)
         throws PickListTypeNotFoundException {
+
+        //MAKE A PICKLIST FACTORY
 
         if (pickListType == null) {
             return null;
@@ -15,17 +18,9 @@ public class PickListFactory {
             case "ambient":
                 pickList = new AmbientPickList();
                 break;
-            case "chilled":
-                pickList = new ChilledPickList();
-                break;
-            case "frozen":
-                pickList = new FrozenPickList();
-                break;
-            case "produce":
-                pickList = new ProducePickList();
-                break;
             default:
                 throw new PickListTypeNotFoundException("Invalid picklist type: " + pickListType);
+                //other cases: CHILLED, FROZEN & PRODUCE
         }
         return pickList;
     }
