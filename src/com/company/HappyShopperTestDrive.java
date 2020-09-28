@@ -21,12 +21,15 @@ public class HappyShopperTestDrive {
         ControllerInterface controller = new HappyShopperController(model);
 
         String pickListType = "ambient";
-        PickListFactory factory = new PickListFactory();
-        try {
-            PickList pickList = factory.getPickList(pickListType);
-            pickList.createPickList();
-        } catch (PickListTypeNotFoundException e) {
-            System.err.print(e);
+        for (int i = 0; i < 5; i++) {
+            PickListFactory factory = new PickListFactory();
+            try {
+                PickList pickList = factory.getPickList(pickListType);
+                pickList.createPickList();
+                model.add(pickList);
+            } catch (PickListTypeNotFoundException e) {
+                System.err.print(e);
+            }
         }
     }
 }

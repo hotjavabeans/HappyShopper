@@ -1,12 +1,7 @@
 package com.company;
 
-public class AmbientPickList implements PickList {
+public class AmbientPickList extends PickList {
 
-    AmbientPickList() {
-
-    }
-
-    @Override
     public void createPickList() {
         System.out.println("Creating Ambient PickList...");
     }

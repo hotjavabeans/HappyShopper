@@ -43,13 +43,13 @@ public class HappyShopperView implements ActionListener, PickListObserver {
         mainMenuMenu.add(exitMenuItem);
         mainMenuFrame.setJMenuBar(mainMenuBar);
 
-        getAmbientButton = new JButton("AMBIENT PICKLIST: " + model.getNumOfPickLists("ambient"));
+        getAmbientButton = new JButton("AMBIENT PICKLISTS: " + model.getNumOfPickLists("ambient"));
         getAmbientButton.addActionListener(this);
-        getChilledButton = new JButton("CHILLED PICKLIST: " + model.getNumOfPickLists("chilled"));
+        getChilledButton = new JButton("CHILLED PICKLISTS: " + model.getNumOfPickLists("chilled"));
         getChilledButton.addActionListener(this);
-        getFrozenButton = new JButton("FROZEN PICKLIST: " + model.getNumOfPickLists("frozen"));
+        getFrozenButton = new JButton("FROZEN PICKLISTS: " + model.getNumOfPickLists("frozen"));
         getFrozenButton.addActionListener(this);
-        getProduceButton = new JButton("PRODUCE PICKLIST: " + model.getNumOfPickLists("produce"));
+        getProduceButton = new JButton("PRODUCE PICKLISTS: " + model.getNumOfPickLists("produce"));
         getProduceButton.addActionListener(this);
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(getAmbientButton);
@@ -85,6 +85,9 @@ public class HappyShopperView implements ActionListener, PickListObserver {
 
     @Override
     public void updatePickLists() {
-
+        int numOfAmbientPickLists = model.getNumOfPickLists("ambient");
+        getAmbientButton.setText("AMBIENT PICKLISTS: " + numOfAmbientPickLists);
+//        int numOfChilledPickLists = model.getNumOfPickLists("chilled");
+//        getChilledButton.setText("CHILLED PICKLISTS: " + numOfChilledPickLists);
     }
 }

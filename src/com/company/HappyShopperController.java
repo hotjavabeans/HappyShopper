@@ -1,13 +1,12 @@
 package com.company;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class HappyShopperController implements ControllerInterface {
     ModelInterface model;
     HappyShopperView view;
     final String AMBIENT = "Ambient ";
-    //more constants here
+    //more constants here?
 
     public HappyShopperController(ModelInterface model) {
         this.model = model;

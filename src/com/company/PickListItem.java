@@ -7,7 +7,7 @@ public class PickListItem {
     protected String name;
     protected String description;
     protected double price;
-//    static String image; NOT USED IN COMMAND LINE VERSION
+//  String imageURL; NOT USED IN COMMAND LINE VERSION
 
     public PickListItem(String n, String d, double p) {
         name = setName(n);
