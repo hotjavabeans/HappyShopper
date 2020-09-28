@@ -5,11 +5,8 @@ import java.util.ArrayList;
 public class HappyShopperModel implements ModelInterface {
     ArrayList<PickListObserver> pickListObservers = new ArrayList<>();
     ArrayList<PickList> ambientPickLists = new ArrayList<>();
+    // Should my ArrayList be of type PickList or a specific type of PickList eg AmbientPickList?
 
-    @Override
-    public void initialize() {
-
-    }
 
 //    @Override
 //    public PickList getPickListType(String pickListType) {

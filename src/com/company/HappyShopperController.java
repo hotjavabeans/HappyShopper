@@ -6,13 +6,12 @@ public class HappyShopperController implements ControllerInterface {
     ModelInterface model;
     HappyShopperView view;
     final String AMBIENT = "Ambient ";
-    //more constants here?
+    //Should I be using constants here? or keep as literal strings?
 
     public HappyShopperController(ModelInterface model) {
         this.model = model;
         view = new HappyShopperView(this, model);
         view.createMainMenu();
-        model.initialize();
     }
 
     @Override
