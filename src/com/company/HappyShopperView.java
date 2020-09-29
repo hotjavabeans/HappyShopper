@@ -1,9 +1,15 @@
 package com.company;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class HappyShopperView implements ActionListener, PickListObserver {
     ControllerInterface controller;
@@ -18,6 +24,7 @@ public class HappyShopperView implements ActionListener, PickListObserver {
     JMenuBar mainMenuBar;
     JMenu mainMenuMenu;
     JMenuItem exitMenuItem;
+
 
     public HappyShopperView(ControllerInterface controller, ModelInterface model) {
         this.controller = controller;
@@ -68,6 +75,94 @@ public class HappyShopperView implements ActionListener, PickListObserver {
         mainMenuFrame.pack();
         mainMenuFrame.setLocationRelativeTo(null);
         mainMenuFrame.setVisible(true);
+        mainMenuFrame.setResizable(false);
+    }
+
+    public void createScanCratesUI() {
+        EventQueue.invokeLater(() -> {
+            JFrame scanCratesFrame = new JFrame("Scan crates");
+            scanCratesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//            try
+//            {
+//                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+            JPanel panel = new JPanel();
+            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+            panel.setOpaque(true);
+//                JTextArea textArea = new JTextArea(15, 50);
+//                textArea.setWrapStyleWord(true);
+//                textArea.setEditable(false);
+//                textArea.setFont(Font.getFont(Font.SANS_SERIF));
+//                JScrollPane scroller = new JScrollPane(textArea);
+//                scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//                scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            JPanel inputPanel = new JPanel();
+            inputPanel.setLayout(new FlowLayout());
+            JTextField input = new JTextField(20);
+            input.setText("01");
+            JButton button = new JButton("Start Picking");
+
+            //SE
+            JPanel crateListPanel = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            //crate quantity will be decided by size and weight of all items in picklist
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            JLabel crate1 = new JLabel("crate 1 info here");
+            crate1.setBorder(new EtchedBorder());
+            crateListPanel.add(crate1, gbc);
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            JLabel crate2 = new JLabel("crate 2 info here");
+            crate2.setBorder(new EtchedBorder());
+            crateListPanel.add(crate2, gbc);
+            gbc.gridx = 0;
+            gbc.gridy = 3;
+            JLabel crate3 = new JLabel("crate 3 info here");
+            crate3.setBorder(new EtchedBorder());
+            crateListPanel.add(crate3, gbc);
+            gbc.gridx = 0;
+            gbc.gridy = 4;
+            JLabel crate4 = new JLabel("crate 4 info here");
+            crate4.setBorder(new EtchedBorder());
+            crateListPanel.add(crate4, gbc);
+            gbc.gridx = 0;
+            gbc.gridy = 5;
+            JLabel crate5 = new JLabel("crate 5 info here");
+            crate5.setBorder(new EtchedBorder());
+            crateListPanel.add(crate5, gbc);
+            gbc.gridx = 0;
+            gbc.gridy = 6;
+            JLabel crate6 = new JLabel("crate 6 info here");
+            crate6.setBorder(new EtchedBorder());
+            crateListPanel.add(crate6, gbc);
+            gbc.gridx = 0;
+            gbc.gridy = 7;
+            JLabel crate7 = new JLabel("crate 7 info here");
+            crate7.setBorder(new EtchedBorder());
+            crateListPanel.add(crate7, gbc);
+            gbc.gridx = 0;
+            gbc.gridy = 8;
+            JLabel crate8 = new JLabel("crate 8 info here");
+            crate8.setBorder(new EtchedBorder());
+            crateListPanel.add(crate8, gbc);
+//                DefaultCaret caret = (DefaultCaret) textArea.getCaret();
+//                caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+//                panel.add(scroller);
+
+            inputPanel.add(input);
+            inputPanel.add(button);
+            panel.add(crateListPanel);
+            panel.add(inputPanel);
+            scanCratesFrame.getContentPane().add(BorderLayout.CENTER, panel);
+            scanCratesFrame.pack();
+            scanCratesFrame.setLocationRelativeTo(null);
+            scanCratesFrame.setVisible(true);
+            scanCratesFrame.setResizable(false);
+        });
     }
 
     @Override

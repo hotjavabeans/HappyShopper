@@ -7,7 +7,7 @@ public class PickListItem {
     protected String name;
     protected String description;
     protected double price;
-//  String imageURL; NOT USED IN COMMAND LINE VERSION
+//  String imageURL; need to be stored in DB?
 
     public PickListItem(String n, String d, double p) {
         name = setName(n);
