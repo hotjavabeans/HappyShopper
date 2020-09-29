@@ -1,10 +1,10 @@
 package com.company;
-
 import javax.swing.*;
 
 public class HappyShopperController implements ControllerInterface {
     ModelInterface model;
     HappyShopperView view;
+
     final String AMBIENT = "Ambient ";
     //Should I be using constants here? or keep as literal strings?
 
@@ -17,9 +17,10 @@ public class HappyShopperController implements ControllerInterface {
     @Override
     public void getAmbientPickList() {
         JOptionPane.showMessageDialog(null,
-                                        "RETRIEVING AMBIENT PICKLIST",
-                                         "AMBIENT PICKLIST SELECTED",
+                                        "Retrieving ambient picklist...",
+                                         "Ambient Picklist Selected",
                                         JOptionPane.WARNING_MESSAGE);
+        view.createScanCratesUI();
     }
 
     public void getChilledPickList() {
