@@ -6,7 +6,7 @@ public class HappyShopperController implements ControllerInterface {
     HappyShopperView view;
 
     final String AMBIENT = "Ambient ";
-    //Should I be using constants here? or keep as literal strings?
+    //Should I be using constants here? or keep as literal strings? Does it matter?
 
     public HappyShopperController(ModelInterface model) {
         this.model = model;
@@ -44,5 +44,26 @@ public class HappyShopperController implements ControllerInterface {
                 JOptionPane.WARNING_MESSAGE);
         view.createScanCratesUI();
     }
+
+    public void getPrinterLabels() {
+        if (view.inputPrinterCode.getText().equals("01")) {
+            JOptionPane.showMessageDialog(null,
+                    "PRINTING LABELS",
+                    "PRINTING LABELS",
+                    JOptionPane.OK_OPTION);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Incorrect printer password entered...",
+                    "Incorrect password",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void startPicking() {
+        /* IF required amount of crates are scanned and not currently in use by another picklist, begin create
+        * picking UI. Not sure how to implement this logic yet. */
+        view.createPickingUI();
+    }
+
 
 }

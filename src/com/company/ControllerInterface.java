@@ -5,4 +5,6 @@ public interface ControllerInterface {
     void getChilledPickList();
     void getFrozenPickList();
     void getProducePickList();
+    void getPrinterLabels();
+    void startPicking();
 }

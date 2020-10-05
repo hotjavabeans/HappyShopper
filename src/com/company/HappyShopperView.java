@@ -1,15 +1,11 @@
 package com.company;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class HappyShopperView implements ActionListener, PickListObserver {
     ControllerInterface controller;
@@ -24,6 +20,10 @@ public class HappyShopperView implements ActionListener, PickListObserver {
     JMenuBar mainMenuBar;
     JMenu mainMenuMenu;
     JMenuItem exitMenuItem;
+    JButton startPickingButton;
+    JButton printLabelsButton;
+    JTextField inputPrinterCode;
+    JFrame pickingUI;
 
 
     public HappyShopperView(ControllerInterface controller, ModelInterface model) {
@@ -71,7 +71,6 @@ public class HappyShopperView implements ActionListener, PickListObserver {
 //        }
         mainMenuFrame.getRootPane().setDefaultButton(getAmbientButton);
         mainMenuFrame.getContentPane().add(mainMenuPanel);
-//        , BorderLayout.CENTER ^^
         mainMenuFrame.pack();
         mainMenuFrame.setLocationRelativeTo(null);
         mainMenuFrame.setVisible(true);
@@ -100,15 +99,16 @@ public class HappyShopperView implements ActionListener, PickListObserver {
 //                scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             JPanel inputPanel = new JPanel();
             inputPanel.setLayout(new FlowLayout());
-            JTextField input = new JTextField(20);
-            input.setText("01");
-            JButton button = new JButton("Start Picking");
-
-            //SE
+            inputPrinterCode = new JTextField(20);
+            inputPrinterCode.setText("01");
+            startPickingButton = new JButton("Start Picking");
+            startPickingButton.addActionListener(this);
+            printLabelsButton = new JButton("Print Lables");
+            printLabelsButton.addActionListener(this);
             JPanel crateListPanel = new JPanel(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.fill = GridBagConstraints.HORIZONTAL;
-            //crate quantity will be decided by size and weight of all items in picklist
+            //crate quantity will be decided by size and weight of all items in picklist (fields not yet added)
             gbc.gridx = 0;
             gbc.gridy = 0;
             JLabel crate1 = new JLabel("crate 1 info here");
@@ -152,9 +152,9 @@ public class HappyShopperView implements ActionListener, PickListObserver {
 //                DefaultCaret caret = (DefaultCaret) textArea.getCaret();
 //                caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 //                panel.add(scroller);
-
-            inputPanel.add(input);
-            inputPanel.add(button);
+            inputPanel.add(inputPrinterCode);
+            inputPanel.add(printLabelsButton);
+            inputPanel.add(startPickingButton);
             panel.add(crateListPanel);
             panel.add(inputPanel);
             scanCratesFrame.getContentPane().add(BorderLayout.CENTER, panel);
@@ -163,6 +163,13 @@ public class HappyShopperView implements ActionListener, PickListObserver {
             scanCratesFrame.setVisible(true);
             scanCratesFrame.setResizable(false);
         });
+    }
+
+    public void createPickingUI() {
+        pickingUI = new JFrame("Picking dashboard");
+        pickingUI.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        pickingUI.setLocationRelativeTo(null);
+        pickingUI.setVisible(true);
     }
 
     @Override
@@ -175,6 +182,10 @@ public class HappyShopperView implements ActionListener, PickListObserver {
             controller.getFrozenPickList();
         } else if (e.getSource() == getProduceButton) {
             controller.getProducePickList();
+        } else if (e.getSource() == printLabelsButton) {
+            controller.getPrinterLabels();
+        } else if (e.getSource() == startPickingButton) {
+            controller.startPicking();
         }
     }
 

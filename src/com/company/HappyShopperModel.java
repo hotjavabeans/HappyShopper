@@ -1,11 +1,14 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class HappyShopperModel implements ModelInterface {
     ArrayList<PickListObserver> pickListObservers = new ArrayList<>();
-    ArrayList<PickList> ambientPickLists = new ArrayList<>();
+
     // Should my ArrayList be of type PickList or a specific type of PickList eg AmbientPickList?
+    ArrayList<PickList> ambientPickLists = new ArrayList<>();
 
 
 //    @Override

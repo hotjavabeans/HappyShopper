@@ -19,7 +19,7 @@ public class HappyShopperTestDrive {
         ControllerInterface controller = new HappyShopperController(model);
 
         String pickListType = "ambient";
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             PickListFactory factory = new PickListFactory();
             try {
                 PickList pickList = factory.getPickList(pickListType);
