@@ -21,6 +21,7 @@ public class HappyShopperController implements ControllerInterface {
                                          "Ambient Picklist Selected",
                                         JOptionPane.WARNING_MESSAGE);
         view.createScanCratesUI();
+        view.mainMenuFrame.setVisible(false);
     }
 
     public void getChilledPickList() {
@@ -63,6 +64,7 @@ public class HappyShopperController implements ControllerInterface {
         /* IF required amount of crates are scanned and not currently in use by another picklist, begin create
         * picking UI. Not sure how to implement this logic yet. */
         view.createPickingUI();
+        view.scanCratesFrame.setVisible(false);
     }
 
 

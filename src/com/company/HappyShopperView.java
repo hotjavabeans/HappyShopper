@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 public class HappyShopperView implements ActionListener, PickListObserver {
     ControllerInterface controller;
     ModelInterface model;
+
     JFrame mainMenuFrame;
     JPanel mainMenuPanel;
     JLabel mainMenuHeader;
@@ -20,11 +21,16 @@ public class HappyShopperView implements ActionListener, PickListObserver {
     JMenuBar mainMenuBar;
     JMenu mainMenuMenu;
     JMenuItem exitMenuItem;
+
+    JFrame scanCratesFrame;
     JButton startPickingButton;
     JButton printLabelsButton;
     JTextField inputPrinterCode;
-    JFrame pickingUI;
 
+    JFrame pickingUI;
+    JPanel pickingPanel;
+    JPanel inputPanel;
+    
 
     public HappyShopperView(ControllerInterface controller, ModelInterface model) {
         this.controller = controller;
@@ -79,7 +85,7 @@ public class HappyShopperView implements ActionListener, PickListObserver {
 
     public void createScanCratesUI() {
         EventQueue.invokeLater(() -> {
-            JFrame scanCratesFrame = new JFrame("Scan crates");
+            scanCratesFrame = new JFrame("Scan crates");
             scanCratesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //            try
 //            {
@@ -168,8 +174,16 @@ public class HappyShopperView implements ActionListener, PickListObserver {
     public void createPickingUI() {
         pickingUI = new JFrame("Picking dashboard");
         pickingUI.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        pickingPanel = new JPanel();
+        pickingPanel.setLayout(new BorderLayout());
+        inputPanel = new JPanel();
+        inputPanel.setLayout(new BorderLayout());
+        pickingPanel.add(inputPanel);
+//        pickingUI.getContentPane().add(BorderLayout.CENTER, pickingPanel);
+        pickingUI.pack();
         pickingUI.setLocationRelativeTo(null);
         pickingUI.setVisible(true);
+        pickingUI.setResizable(false);
     }
 
     @Override
