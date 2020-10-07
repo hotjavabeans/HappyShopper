@@ -67,5 +67,8 @@ public class HappyShopperController implements ControllerInterface {
         view.scanCratesFrame.setVisible(false);
     }
 
+    public void repaintToNextItem() {
+        view.pickingUIFrame.repaint();
+    }
 
 }

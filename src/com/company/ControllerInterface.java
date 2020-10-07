@@ -7,4 +7,5 @@ public interface ControllerInterface {
     void getProducePickList();
     void getPrinterLabels();
     void startPicking();
+    void repaintToNextItem();
 }

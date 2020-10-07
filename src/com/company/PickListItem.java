@@ -3,7 +3,7 @@ package com.company;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class PickListItem {
+public class PickListItem extends PickList {
     protected String name;
     protected String description;
     protected double price;

@@ -2,7 +2,6 @@ package com.company;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +10,7 @@ public class HappyShopperView implements ActionListener, PickListObserver {
     ControllerInterface controller;
     ModelInterface model;
 
+//    main menu
     JFrame mainMenuFrame;
     JPanel mainMenuPanel;
     JLabel mainMenuHeader;
@@ -22,15 +22,19 @@ public class HappyShopperView implements ActionListener, PickListObserver {
     JMenu mainMenuMenu;
     JMenuItem exitMenuItem;
 
+//    scan crates
     JFrame scanCratesFrame;
     JButton startPickingButton;
     JButton printLabelsButton;
     JTextField inputPrinterCode;
 
-    JFrame pickingUI;
-    JPanel pickingPanel;
-    JPanel inputPanel;
-    
+//    pick items
+    JFrame pickingUIFrame;
+    JPanel pickingUIPanel;
+    JPanel pickingUIInputPanel;
+    JButton pickingUIScanItemButton;
+    JLabel pickingUIItemNameHeader;
+    JLabel pickingUIItemNameDescription;
 
     public HappyShopperView(ControllerInterface controller, ModelInterface model) {
         this.controller = controller;
@@ -38,7 +42,7 @@ public class HappyShopperView implements ActionListener, PickListObserver {
         model.registerObserver((PickListObserver)this);
     }
 
-    public void createMainMenu() {
+    public void createMainMenu() { /*Should this be inside an inner class that implements JFrame? */
         JFrame.setDefaultLookAndFeelDecorated(true);
         mainMenuPanel = new JPanel(new BorderLayout());
         mainMenuFrame = new JFrame("Main Menu");
@@ -51,13 +55,13 @@ public class HappyShopperView implements ActionListener, PickListObserver {
         mainMenuMenu = new JMenu("App Control");
 
         exitMenuItem = new JMenuItem("Quit");
-        exitMenuItem.addActionListener(e -> System.exit(0));
+        exitMenuItem.addActionListener(e -> System.exit(0)); /*How to add more lambda expressions?*/
         mainMenuBar.add(mainMenuMenu);
         mainMenuMenu.add(exitMenuItem);
         mainMenuFrame.setJMenuBar(mainMenuBar);
 
         getAmbientButton = new JButton("AMBIENT PICKLISTS: " + model.getNumOfPickLists("ambient"));
-        getAmbientButton.addActionListener(this);
+        getAmbientButton.addActionListener(this); /*THESE SHOULD ALL BE INNER CLASSES*/
         getChilledButton = new JButton("CHILLED PICKLISTS: " + model.getNumOfPickLists("chilled"));
         getChilledButton.addActionListener(this);
         getFrozenButton = new JButton("FROZEN PICKLISTS: " + model.getNumOfPickLists("frozen"));
@@ -109,7 +113,7 @@ public class HappyShopperView implements ActionListener, PickListObserver {
             inputPrinterCode.setText("01");
             startPickingButton = new JButton("Start Picking");
             startPickingButton.addActionListener(this);
-            printLabelsButton = new JButton("Print Lables");
+            printLabelsButton = new JButton("Print Labels");
             printLabelsButton.addActionListener(this);
             JPanel crateListPanel = new JPanel(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
@@ -172,20 +176,28 @@ public class HappyShopperView implements ActionListener, PickListObserver {
     }
 
     public void createPickingUI() {
-        pickingUI = new JFrame("Picking dashboard");
-        pickingUI.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        pickingPanel = new JPanel();
-        pickingPanel.setLayout(new BorderLayout());
-        inputPanel = new JPanel();
-        inputPanel.setLayout(new BorderLayout());
-        pickingPanel.add(inputPanel);
-//        pickingUI.getContentPane().add(BorderLayout.CENTER, pickingPanel);
-        pickingUI.pack();
-        pickingUI.setLocationRelativeTo(null);
-        pickingUI.setVisible(true);
-        pickingUI.setResizable(false);
+        pickingUIFrame = new JFrame("Picking dashboard");
+        pickingUIFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        pickingUIPanel = new JPanel();
+        pickingUIPanel.setLayout(new BoxLayout(pickingUIPanel, BoxLayout.Y_AXIS));
+        pickingUIPanel.setOpaque(true);
+        pickingUIInputPanel = new JPanel();
+        pickingUIInputPanel.setLayout(new BorderLayout());
+        pickingUIScanItemButton = new JButton("Scan Item");
+        pickingUIScanItemButton.addActionListener(this);
+        pickingUIItemNameHeader = new JLabel("ITEM NAME HERE");
+        pickingUIFrame.getContentPane().add(BorderLayout.NORTH, pickingUIItemNameHeader);
+        pickingUIItemNameDescription = new JLabel("ITEM DESCRIPTION HERE");
+        pickingUIPanel.add(pickingUIItemNameDescription);
+        pickingUIPanel.add(pickingUIScanItemButton);
+        pickingUIFrame.getContentPane().add(BorderLayout.CENTER, pickingUIPanel);
+        pickingUIFrame.pack();
+        pickingUIFrame.setLocationRelativeTo(null);
+        pickingUIFrame.setVisible(true);
+        pickingUIFrame.setResizable(false);
     }
 
+//    NEED TO CHANGE THESE LISTENERS INTO INNER CLASSES. This method is not OOP friendly.
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == getAmbientButton) {
@@ -200,6 +212,8 @@ public class HappyShopperView implements ActionListener, PickListObserver {
             controller.getPrinterLabels();
         } else if (e.getSource() == startPickingButton) {
             controller.startPicking();
+        } else if (e.getSource() == pickingUIScanItemButton) {
+            controller.repaintToNextItem();
         }
     }
 
